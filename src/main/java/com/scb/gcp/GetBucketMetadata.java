@@ -1,5 +1,6 @@
 package com.scb.gcp;
 
+import org.apache.log4j.Logger;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
@@ -8,9 +9,12 @@ import java.util.Map;
 
 public class GetBucketMetadata {
 
+
+
     public static void main(String[] args) {
         getBucketMetadata("sc-test-360609","sc-test-merklesg");
 
+        System.out.println(GetBucketMetadata.class.getName());
     }
 
 
@@ -28,6 +32,8 @@ public class GetBucketMetadata {
         Bucket bucket =
                 storage.get(bucketName, Storage.BucketGetOption.fields(Storage.BucketField.values()));
 
+
+        System.out.println("Listing bucket content: " + bucket.list().getValues().toString());
         // Print bucket metadata
         System.out.println("BucketName: " + bucket.getName());
         System.out.println("DefaultEventBasedHold: " + bucket.getDefaultEventBasedHold());
